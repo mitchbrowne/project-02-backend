@@ -62,8 +62,8 @@ ActiveRecord::Schema.define(version: 2020_04_03_054549) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.boolean "admin"
-    t.string "user_type"
+    t.boolean "admin", default: false
+    t.string "user_type", default: "participant"
     t.integer "ad_id"
     t.integer "company_id"
     t.integer "gallery_id"
