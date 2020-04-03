@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2020_04_03_054549) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "galleries_users", force: :cascade do |t|
+  create_table "galleries_users", id: false, force: :cascade do |t|
     t.integer "gallery_id"
     t.integer "user_id"
   end
