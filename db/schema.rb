@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_03_054549) do
+ActiveRecord::Schema.define(version: 2020_04_04_070808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,22 +19,15 @@ ActiveRecord::Schema.define(version: 2020_04_03_054549) do
     t.string "name"
     t.string "image"
     t.string "ad_type"
-    t.integer "user_id_has_seen"
-    t.integer "user_id_hasnot_seen"
     t.integer "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "ads_galleries", id: false, force: :cascade do |t|
     t.integer "ad_id"
     t.integer "gallery_id"
-  end
-
-  create_table "ads_users", id: false, force: :cascade do |t|
-    t.integer "ad_id"
-    t.integer "user_id_has_seen"
-    t.integer "user_id_hasnot_seen"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -47,15 +40,16 @@ ActiveRecord::Schema.define(version: 2020_04_03_054549) do
 
   create_table "galleries", force: :cascade do |t|
     t.string "name"
-    t.string "category"
-    t.integer "user_id_creator"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "category"
   end
 
-  create_table "galleries_users", id: false, force: :cascade do |t|
-    t.integer "gallery_id"
+  create_table "histories", id: false, force: :cascade do |t|
+    t.integer "ad_id"
     t.integer "user_id"
+    t.boolean "has_been_seen"
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,9 +58,7 @@ ActiveRecord::Schema.define(version: 2020_04_03_054549) do
     t.string "password_digest"
     t.boolean "admin", default: false
     t.string "user_type", default: "participant"
-    t.integer "ad_id"
     t.integer "company_id"
-    t.integer "gallery_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
