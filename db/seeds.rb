@@ -12,9 +12,9 @@ c3 = Company.create :name => 'Uber Eats', :description => 'Food Delivery', :imag
 puts "#{Company.count} companies created"
 
 Ad.destroy_all
-a1 = Ad.create :name => 'AirPods Pro - Snap', :image => image_url('Apple_AirPods_Pro_Snap.png'), :ad_type => 'TV'
-a2 = Ad.create :name => 'AirPods - Bounce', :image => image_url('Apple_AirPods_Bounce.png'), :ad_type => 'TV'
-a3 = Ad.create :name => 'IPhone 11 Pro - Its Tough Out There', :image => image_url('Apple_ItsToughOutThere_IPhone11Pro.png'), :ad_type => 'TV'
+a1 = Ad.create :name => 'AirPods Pro - Snap', :image => 'Apple_AirPods_Pro_Snap.png', :ad_type => 'TV'
+a2 = Ad.create :name => 'AirPods - Bounce', :image => 'Apple_AirPods_Bounce.png', :ad_type => 'TV'
+a3 = Ad.create :name => 'IPhone 11 Pro - Its Tough Out There', :image => 'Apple_ItsToughOutThere_IPhone11Pro.png', :ad_type => 'TV'
 
 a4 = Ad.create :name => 'Kim and Sharon', :image => 'https://i.dailymail.co.uk/1s/2019/11/24/13/21402890-0-image-a-26_1574601178356.jpg', :ad_type => 'Instagram'
 a5 = Ad.create :name => 'Barnsey and Farnsey', :image => 'https://res.cloudinary.com/themusicau/image/upload/c_fill,f_auto,h_459,w_768/standard/news_19/barnesy_farnsy_anhsy_h_1019', :ad_type => 'TV'
@@ -23,5 +23,23 @@ puts "#{Ad.count} ads created"
 Gallery.destroy_all
 g1 = Gallery.create :name => 'Apple 2019 Ads', :category => 'Tech Consumer'
 g2 = Gallery.create :name => 'UberEats 2019 Ads', :category => 'Delivery'
-
 puts "#{Gallery.count} galleries created"
+
+History.destroy_all
+h1 = History.create :has_been_seen => true
+h2 = History.create :has_been_seen => false
+puts "#{History.count} histories created"
+
+u2.ads << a1 << a2 << a3
+
+u1.histories << h1
+a1.histories << h1
+
+c1.users << u1 << u2 << u3
+c2.users << u4
+
+c1.ads << a2 << a3 << a4 << a5
+
+g1.ads << a1 << a2 << a3 << a5
+
+u2.galleries << g1
