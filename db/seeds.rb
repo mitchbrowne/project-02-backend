@@ -25,3 +25,9 @@ g1 = Gallery.create :name => 'Apple 2019 Ads', :category => 'Tech Consumer'
 g2 = Gallery.create :name => 'UberEats 2019 Ads', :category => 'Delivery'
 
 puts "#{Gallery.count} galleries created"
+
+# Associations ###################################
+# Companies and Users (A company has many users, a user belongs to a company)
+c1.users << u1
+c2.users << u2
+c3.users << u3
