@@ -46,6 +46,11 @@ ActiveRecord::Schema.define(version: 2020_04_04_070808) do
     t.string "category"
   end
 
+  create_table "galleries_users", id: false, force: :cascade do |t|
+    t.integer "gallery_id"
+    t.integer "user_id"
+  end
+
   create_table "histories", id: false, force: :cascade do |t|
     t.integer "ad_id"
     t.integer "user_id"
