@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_04_070808) do
+ActiveRecord::Schema.define(version: 2020_04_06_060939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,9 +46,9 @@ ActiveRecord::Schema.define(version: 2020_04_04_070808) do
     t.string "category"
   end
 
-  create_table "histories", id: false, force: :cascade do |t|
-    t.integer "ad_id"
+  create_table "histories", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "ad_id"
     t.boolean "has_been_seen"
   end
 
