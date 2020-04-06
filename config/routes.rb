@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  # get 'histories/index'
+  # get 'histories/show'
+  # get 'histories/edit'
+  # get 'histories/new'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :users, only: [:create, :show, :index]
 
@@ -9,6 +14,7 @@ Rails.application.routes.draw do
   resources :ads
   resources :galleries
   resources :companies
+  resources :histories
 
   get '/requests/ads' => 'requests#ads'
   get '/requests/galleries' => 'requests#galleries'

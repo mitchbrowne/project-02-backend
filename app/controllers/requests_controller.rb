@@ -32,10 +32,21 @@ class RequestsController < ApplicationController
   def galleries_show
     @gallery = Gallery.find(params[:id])
     @ads = @gallery.ads
+
+    # create a history for each ad, update to current_user
+    @histories = @ads.map do |ad|
+      h = History.new
+      h.user_id = 2
+      h.ad_id = ad.id
+      h.save
+      h
+    end
+
     if @gallery
       render json: {
         gallery: @gallery,
-        ads: @ads
+        ads: @ads,
+        histories: @histories
       }
     else
       render json: {
