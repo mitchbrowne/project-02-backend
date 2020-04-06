@@ -20,23 +20,14 @@
 <%= image_tag(@ad.image, class: 'preview') %>
 
 <p>
-  <strong>Company Id:</strong>
-  <%= @company.id unless @company.nil? %>
-</p>
-
-<p>
   <strong>Company Name:</strong>
-  <%= @company.name unless @company.nil? %>
-</p>
-
-<p>
-  <strong>User Id:</strong>
-  <%= @ad.id %>
+  <%= @ad.company.name %>
 </p>
 
 <p>
   <strong>User Name:</strong>
-  <%= @ad.id %>
+  <%= @ad.user.name if @ad.user && !@ad.user.name.nil?%>
 </p>
 
+<%= link_to 'Edit', edit_ad_path(@ad) %>
 <%= link_to 'Back', ads_path %>

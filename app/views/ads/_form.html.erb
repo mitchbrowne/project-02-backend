@@ -4,10 +4,13 @@
   <%= f.text_field :name, :required => true %>
 
   <%= f.label :ad_type %>
-  <%= f.select :ad_type, options_for_select(["TV", "Online", "Social Media", "Billboard", "Newspaper/Magazine"]), :include_blank => true %>
+  <%= f.select :ad_type, options_for_select(["TV", "Online", "Social Media", "Billboard", "Newspaper/Magazine"], @ad.ad_type), :include_blank => true %>
 
   <%= f.label :image %>
   <%= f.text_field :image, :required => true %>
+
+  <%= f.label "Assign Company (this will be done automatically on front-end by user logged in)" %><br>
+  <%= f.select :company_id, @companies.pluck(:name, :id), :include_blank => true %>
 
   <%= f.submit nil %>
 

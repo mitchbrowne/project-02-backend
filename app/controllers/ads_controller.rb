@@ -5,6 +5,7 @@ class AdsController < ApplicationController
   # GET /ads/new
   def new
     @ad = Ad.new
+    @companies = Company.all
   end
 
   # POST /ads
@@ -30,8 +31,6 @@ class AdsController < ApplicationController
   # GET /ads.json
   def index
     @ads = Ad.all
-    @companies = Company.all
-    @users = User.all
   end
 
   # GET /ads/1
@@ -41,6 +40,7 @@ class AdsController < ApplicationController
 
   # GET /ads/1/edit
   def edit
+    @companies = Company.all
   end
 
   # PATCH/PUT /ads/1
@@ -68,10 +68,9 @@ class AdsController < ApplicationController
   private
   def set_ad
     @ad = Ad.find(params[:id])
-    @company = Company.all[@ad.company_id] unless @ad.company_id.nil?
   end
 
   def ad_params
-    params.require(:ad).permit(:name, :ad_type, :image)
+    params.require(:ad).permit(:name, :ad_type, :image, :company_id)
   end
 end

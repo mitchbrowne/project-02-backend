@@ -6,9 +6,8 @@
       <th>Name</th>
       <th>Ad Type</th>
       <th>Image</th>
-      <th>Company Id</th>
+      <th>Galleries</th>
       <th>Company Name</th>
-      <th>User Id</th>
       <th>User Name</th>
       <th colspan="3">Controls</th>
     </tr>
@@ -20,10 +19,13 @@
         <td><%= ad.name %></td>
         <td><%= ad.ad_type %></td>
         <td><%= image_tag(ad.image, class: 'thumbnail') %></td>
-        <td><%= @companies.all[ad.company_id].id unless ad.company_id.nil? %></td>
-        <td><%= @companies.all[ad.company_id].name unless ad.company_id.nil? %></td>
-        <td><%= @users.all[ad.user_id] unless ad.user_id.nil? %></td>
-        <td><%= ad.user_id unless ad.user_id.nil? %></td>
+        <td>
+          <% ad.galleries.each do |gallery| %>
+            <p><%= gallery.name %></p>
+          <% end %>
+        </td>
+        <td><%= ad.company.name if ad.company && !ad.company_id.nil? %></td>
+        <td><%= ad.user.name if ad.user && !ad.user.name.nil? %></td>
         <td><%= link_to 'Show', ad %></td>
         <td><%= link_to 'Edit', edit_ad_path(ad) %></td>
         <td><%= link_to 'Destroy', ad, method: :delete %></td>
