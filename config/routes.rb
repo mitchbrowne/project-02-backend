@@ -12,5 +12,6 @@ Rails.application.routes.draw do
 
   get '/requests/ads' => 'requests#ads'
   get '/requests/galleries' => 'requests#galleries'
+  get '/requests/galleries/:id' => 'requests#galleries_show'
   get '/requests/companies' => 'requests#companies'
 end
