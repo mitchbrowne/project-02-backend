@@ -1,0 +1,18 @@
+<%= form_for(@gallery) do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, :required => true %>
+
+  <%= f.label :category %>
+  <%= f.text_field :category, :required => true %>
+
+  <%= f.label "Choose Ads" %><br>
+  <%= hidden_field_tag "gallery[ad_ids][]", nil %>
+  <% @ads.sort.each do |ad| %>
+    <%= check_box_tag "gallery[ad_ids][]", ad.id, @gallery.ad_ids.include?(ad.id) %>
+    <%= ad.name %><br>
+  <% end %>
+
+  <%= f.submit nil %>
+
+<% end %>
