@@ -1,0 +1,14 @@
+<%= form_for @ad do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, :required => true %>
+
+  <%= f.label :ad_type %>
+  <%= f.select :ad_type, options_for_select(["TV", "Online", "Social Media", "Billboard", "Newspaper/Magazine"]), :include_blank => true %>
+
+  <%= f.label :image %>
+  <%= f.text_field :image, :required => true %>
+
+  <%= f.submit nil %>
+
+<% end %>
