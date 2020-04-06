@@ -1,0 +1,28 @@
+<h1>Show Gallery</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Gallery Name:</strong>
+  <%= @gallery.name %>
+</p>
+
+<p>
+  <strong>Gallery Category:</strong>
+  <%= @gallery.category %>
+</p>
+
+<div>
+  <strong>Ads:</strong>
+  <% @gallery.ads.each do |ad| %>
+    <p><%= ad.name %></p>
+  <% end %>
+</div>
+
+<p>
+  <strong>User Id:</strong>
+  <%= @gallery.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_gallery_path(@gallery) %>
+<%= link_to 'Back', galleries_path %>
