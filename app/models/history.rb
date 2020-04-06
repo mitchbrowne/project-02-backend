@@ -1,4 +1,4 @@
 class History < ApplicationRecord
-    belongs_to :user
-    belongs_to :ad
+    belongs_to :user, :optional => true
+    belongs_to :ad, :optional => true
 end
