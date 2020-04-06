@@ -31,9 +31,11 @@ class RequestsController < ApplicationController
 
   def galleries_show
     @gallery = Gallery.find(params[:id])
+    @ads = @gallery.ads
     if @gallery
       render json: {
-        gallery: @gallery
+        gallery: @gallery,
+        ads: @ads
       }
     else
       render json: {
