@@ -8,4 +8,5 @@ Rails.application.routes.draw do
 
   resources :ads
   resources :galleries
+  resources :companies
 end

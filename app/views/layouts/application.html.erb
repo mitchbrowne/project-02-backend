@@ -11,6 +11,11 @@
   </head>
 
   <body>
+    <nav>
+      <%= link_to 'Companies', companies_path %>
+      <%= link_to 'Ads', ads_path %>
+      <%= link_to 'Galleries', galleries_path %>
+    </nav>
     <%= yield %>
   </body>
 </html>

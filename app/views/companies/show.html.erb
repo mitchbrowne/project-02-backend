@@ -1,0 +1,30 @@
+<h1>Show Company</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company Name:</strong>
+  <%= @company.name %>
+</p>
+
+<p>
+  <strong>Company Description:</strong>
+  <%= @company.description %>
+</p>
+
+<p>
+  <strong>Image URL:</strong>
+  <%= @company.image %>
+</p>
+
+<%= image_tag(@company.image, class: 'preview') %>
+
+<div>
+  <strong>Users:</strong>
+  <% @company.users.each do |user| %>
+    <p><%= user.name %></p>
+  <% end %>
+</div>
+
+<%= link_to 'Edit', edit_company_path(@company) %>
+<%= link_to 'Back', companies_path %>

@@ -65,7 +65,7 @@ class GalleriesController < ApplicationController
 
     respond_to do |format|
       if @gallery.update(gallery_params)
-        format.html { redirect_to @gallery, notice: 'Ad was successfully updated.' }
+        format.html { redirect_to @gallery, notice: 'Gallery was successfully updated.' }
         format.json { render :show, status: :ok, location: @gallery }
       else
         format.html { render :edit }
