@@ -13,6 +13,9 @@
     <%= ad.name %><br>
   <% end %>
 
+  <%= f.label "Assign User (this will be done automatically on front-end by user logged in)" %><br>
+  <%= f.select :user_id, @users.pluck(:name, :id), :include_blank => true %>
+
   <%= f.submit nil %>
 
 <% end %>

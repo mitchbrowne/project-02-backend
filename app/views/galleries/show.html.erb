@@ -21,7 +21,12 @@
 
 <p>
   <strong>User Id:</strong>
-  <%= @gallery.user_id %>
+  <%= @gallery.user.name if @gallery.user && !@gallery.user.name.nil? %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @gallery.user.company.name if @gallery.user && @gallery.user.company && !@gallery.user.company.name.nil? %>
 </p>
 
 <%= link_to 'Edit', edit_gallery_path(@gallery) %>

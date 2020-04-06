@@ -6,6 +6,8 @@
       <th>Name</th>
       <th>Description</th>
       <th>Image</th>
+      <th>Galleries</th>
+      <th>Ads</th>
       <th>User Names</th>
       <th colspan="3">Controls</th>
     </tr>
@@ -17,6 +19,16 @@
         <td><%= company.name %></td>
         <td><%= company.description %></td>
         <td><%= image_tag(company.image, class: 'thumbnail') %></td>
+        <td>
+          <% company.galleries.each do |gallery| %>
+            <p><%= gallery.name %></p>
+          <% end %>
+        </td>
+        <td>
+          <% company.ads.each do |ad| %>
+            <p><%= ad.name %></p>
+          <% end %>
+        </td>
         <td>
           <% company.users.each do |user| %>
             <p><%= user.name %></p>
