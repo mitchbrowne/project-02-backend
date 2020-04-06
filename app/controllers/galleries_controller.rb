@@ -6,6 +6,7 @@ class GalleriesController < ApplicationController
   def new
     @gallery = Gallery.new
     @ads = Ad.all
+    @users = User.all
   end
 
   # POST /galleries
@@ -49,6 +50,7 @@ class GalleriesController < ApplicationController
   # GET /galleries/1/edit
   def edit
     @ads = Ad.all
+    @users = User.all
   end
 
   # PATCH/PUT /galleries/1
@@ -88,6 +90,6 @@ class GalleriesController < ApplicationController
   end
 
   def gallery_params
-    params.require(:gallery).permit(:name, :category, :ad_ids)
+    params.require(:gallery).permit(:name, :category, :user_id, :ad_ids)
   end
 end
