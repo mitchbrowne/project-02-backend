@@ -1,4 +1,6 @@
 class RequestsController < ApplicationController
+
+
   def ads
     @ads = Ad.all
     if @ads
@@ -23,6 +25,33 @@ class RequestsController < ApplicationController
       render json: {
         status: 500,
         errors: ['no galleries found']
+      }
+    end
+  end
+
+  def galleries_show
+    @gallery = Gallery.find(params[:id])
+    @ads = @gallery.ads
+
+    # create a history for each ad, update to current_user
+    @histories = @ads.map do |ad|
+      h = History.new
+      h.user_id = 2
+      h.ad_id = ad.id
+      h.save
+      h
+    end
+
+    if @gallery
+      render json: {
+        gallery: @gallery,
+        ads: @ads,
+        histories: @histories
+      }
+    else
+      render json: {
+        status: 500,
+        errors: ['no gallery found']
       }
     end
   end

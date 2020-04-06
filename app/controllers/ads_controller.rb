@@ -31,16 +31,6 @@ class AdsController < ApplicationController
   # GET /ads.json
   def index
     @ads = Ad.all
-    if @ads
-      render json: {
-        ads: @ads
-      }
-    else
-      render json: {
-        statis: 500,
-        errors: ['no ads found']
-      }
-    end
   end
 
   # GET /ads/1
