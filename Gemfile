@@ -5,6 +5,7 @@ ruby '2.7.0'
 
 # project gems
 gem 'rack-cors'
+gem 'rails_12factor', group: :production
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.2'
