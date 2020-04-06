@@ -9,4 +9,8 @@ Rails.application.routes.draw do
   resources :ads
   resources :galleries
   resources :companies
+
+  get '/requests/ads' => 'requests#ads'
+  get '/requests/galleries' => 'requests#galleries'
+  get '/requests/companies' => 'requests#companies'
 end
