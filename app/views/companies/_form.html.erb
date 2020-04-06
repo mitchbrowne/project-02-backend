@@ -1,0 +1,21 @@
+<%= form_for(@company) do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, :required => true %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description, :required => true %>
+
+  <%= f.label :image %>
+  <%= f.text_field :image %>
+
+  <%= f.label "Choose Users" %><br>
+  <%= hidden_field_tag "user[user_ids][]", nil %>
+  <% @users.sort.each do |user| %>
+    <%= check_box_tag "user[user_ids][]", user.id, @company.user_ids.include?(user.id) %>
+    <%= user.name %><br>
+  <% end %>
+
+  <%= f.submit nil %>
+
+<% end %>
