@@ -15,16 +15,7 @@ class AdsController < ApplicationController
     # Must attach current user to ad, including their company id
     # @ad.user_id << @current_user
     # @ad.company_id << @current_user.company
-
-    respond_to do |format|
-      if @ad.save
-        format.html { redirect_to @ad, notice: 'Ad was successfully created.' }
-        format.json { render :show, status: :created, location: @ad }
-      else
-        format.html { render :new }
-        format.json { render json: @ad.errors, status: :unprocessable_entity }
-      end
-    end
+    @ad.save
   end
 
   # GET /ads
