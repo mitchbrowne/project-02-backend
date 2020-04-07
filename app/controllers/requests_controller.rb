@@ -85,9 +85,18 @@ class RequestsController < ApplicationController
   end
 
   def histories_update
-    @history = History.find params[:id]
-    @history = History.update history_params
+    @history = History.find history_params[:id]
+    @history.update history_params
     @history.save
+    # respond_to do |format|
+    #   if @history.update(history_params)
+    #     format.html { redirect_to @history, notice: 'History was successfully updated.' }
+    #     format.json { render :show, status: :ok, location: @history }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @history.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   def companies
@@ -106,7 +115,7 @@ class RequestsController < ApplicationController
 
   private
   def history_params
-    params.require(:history).permit(:user_id, :ad_id, :has_been_seen)
+    params.require(:request).permit(:id, :user_id, :ad_id, :has_been_seen)
   end
 
 end
