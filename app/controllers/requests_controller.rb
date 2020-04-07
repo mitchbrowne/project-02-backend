@@ -31,9 +31,13 @@ class RequestsController < ApplicationController
 
   def galleries
     @galleries = Gallery.all
+    @companies = @galleries.map do |gallery|
+      company = gallery.user.company if gallery.user && gallery.user.company && !gallery.user.company.name.nil?
+    end
     if @galleries
       render json: {
-        galleries: @galleries
+        galleries: @galleries,
+        companies: @companies
       }
     else
       render json: {
