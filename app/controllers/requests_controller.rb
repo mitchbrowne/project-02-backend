@@ -88,7 +88,9 @@ class RequestsController < ApplicationController
 
     if @history_info
       render json: {
-        history_info: @history_info
+        gallery: @gallery,
+        ads: @ads,
+        history_info: @history_info,
       }
     else
       render json: {
