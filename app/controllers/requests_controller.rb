@@ -15,11 +15,29 @@ class RequestsController < ApplicationController
     end
   end
 
+  def companies
+    @companies = Company.all
+    if @companies
+      render json: {
+        companies: @companies
+      }
+    else
+      render json: {
+        status: 500,
+        errors: ['no companies found']
+      }
+    end
+  end
+
   def galleries
     @galleries = Gallery.all
+    @companies = @galleries.map do |gallery|
+      company = gallery.user.company if gallery.user && gallery.user.company && !gallery.user.company.name.nil?
+    end
     if @galleries
       render json: {
-        galleries: @galleries
+        galleries: @galleries,
+        companies: @companies
       }
     else
       render json: {
@@ -74,7 +92,9 @@ class RequestsController < ApplicationController
 
     if @history_info
       render json: {
-        history_info: @history_info
+        gallery: @gallery,
+        ads: @ads,
+        history_info: @history_info,
       }
     else
       render json: {
@@ -88,29 +108,6 @@ class RequestsController < ApplicationController
     @history = History.find history_params[:id]
     @history.update history_params
     @history.save
-    # respond_to do |format|
-    #   if @history.update(history_params)
-    #     format.html { redirect_to @history, notice: 'History was successfully updated.' }
-    #     format.json { render :show, status: :ok, location: @history }
-    #   else
-    #     format.html { render :edit }
-    #     format.json { render json: @history.errors, status: :unprocessable_entity }
-    #   end
-    # end
-  end
-
-  def companies
-    @companies = Company.all
-    if @companies
-      render json: {
-        companies: @companies
-      }
-    else
-      render json: {
-        status: 500,
-        errors: ['no companies']
-      }
-    end
   end
 
   private
