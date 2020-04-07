@@ -28,6 +28,9 @@ puts "#{Gallery.count} galleries created"
 History.destroy_all
 h1 = History.create :has_been_seen => true
 h2 = History.create :has_been_seen => true
+h3 = History.create :has_been_seen => false
+h4 = History.create :has_been_seen => true
+h5 = History.create :has_been_seen => true
 puts "#{History.count} histories created"
 
 u2.ads << a1 << a2 << a3
@@ -36,6 +39,10 @@ u1.histories << h1
 a1.histories << h1
 u2.histories << h2
 a1.histories << h2
+u3.histories << h3
+a1.histories << h3
+u4.histories << h4
+a1.histories << h4
 
 c1.users << u1 << u2 << u3
 c2.users << u4

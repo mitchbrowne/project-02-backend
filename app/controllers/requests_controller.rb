@@ -56,6 +56,49 @@ class RequestsController < ApplicationController
     end
   end
 
+  # send all histories for each ad in specific gallery
+  def histories_show
+    @gallery = Gallery.find(params[:id])
+    @ads = @gallery.ads
+    @history_info = @ads.map do |ad|
+      has_seen_total = ad.histories.count { |e| e.has_been_seen == true }
+      has_notseen_total = ad.histories.count { |e| e.has_been_seen == false }
+      total = has_seen_total + has_notseen_total
+      history = {
+        has_seen_total: has_seen_total,
+        has_notseen_total: has_notseen_total,
+        total: total
+      }
+
+    end
+
+    if @history_info
+      render json: {
+        history_info: @history_info
+      }
+    else
+      render json: {
+        status: 500,
+        errors: ['no histories found']
+      }
+    end
+  end
+
+  def histories_update
+    @history = History.find history_params[:id]
+    @history.update history_params
+    @history.save
+    # respond_to do |format|
+    #   if @history.update(history_params)
+    #     format.html { redirect_to @history, notice: 'History was successfully updated.' }
+    #     format.json { render :show, status: :ok, location: @history }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @history.errors, status: :unprocessable_entity }
+    #   end
+    # end
+  end
+
   def companies
     @companies = Company.all
     if @companies
@@ -69,4 +112,10 @@ class RequestsController < ApplicationController
       }
     end
   end
+
+  private
+  def history_params
+    params.require(:request).permit(:id, :user_id, :ad_id, :has_been_seen)
+  end
+
 end
