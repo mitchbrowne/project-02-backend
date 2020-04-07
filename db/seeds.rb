@@ -12,9 +12,9 @@ c3 = Company.create :name => 'Uber Eats', :description => 'Food Delivery', :imag
 puts "#{Company.count} companies created"
 
 Ad.destroy_all
-a1 = Ad.create :name => 'AirPods Pro - Snap', :image => 'Apple_AirPods_Pro_Snap.png', :ad_type => 'TV'
-a2 = Ad.create :name => 'AirPods - Bounce', :image => 'Apple_AirPods_Bounce.png', :ad_type => 'TV'
-a3 = Ad.create :name => 'IPhone 11 Pro - Its Tough Out There', :image => 'Apple_ItsToughOutThere_IPhone11Pro.png', :ad_type => 'TV'
+a1 = Ad.create :name => 'AirPods Pro - Snap', :image => 'https://i.ytimg.com/vi/tn837tG2cxA/maxresdefault.jpg', :ad_type => 'TV'
+a2 = Ad.create :name => 'AirPods - Bounce', :image => 'https://i.ytimg.com/vi/yyNtm0LZiKc/maxresdefault.jpg', :ad_type => 'TV'
+a3 = Ad.create :name => 'IPhone 11 Pro - Its Tough Out There', :image => 'https://www.macobserver.com/wp-content/uploads/2019/09/iPhone-11-Pro-Tough.jpg', :ad_type => 'TV'
 
 a4 = Ad.create :name => 'Kim and Sharon', :image => 'https://i.dailymail.co.uk/1s/2019/11/24/13/21402890-0-image-a-26_1574601178356.jpg', :ad_type => 'Instagram'
 a5 = Ad.create :name => 'Barnsey and Farnsey', :image => 'https://res.cloudinary.com/themusicau/image/upload/c_fill,f_auto,h_459,w_768/standard/news_19/barnesy_farnsy_anhsy_h_1019', :ad_type => 'TV'
@@ -42,6 +42,7 @@ c2.users << u4
 
 c1.ads << a2 << a3 << a4 << a5
 
-g1.ads << a1 << a2 << a3 << a5
+g1.ads << a1 << a2 << a3
+g2.ads << a4 << a5
 
 u2.galleries << g1
