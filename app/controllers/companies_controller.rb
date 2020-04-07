@@ -14,7 +14,12 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
     # Must attach current user to company
     # @company.user_id << @current_user
-
+    # @company.users = []
+    # unless params[:user][:user_ids].nil?
+    #   params[:user][:user_ids].each do |user_id|
+    #     @company.users << User.find(user_id) unless user_id.empty?
+    #   end
+    # end
 
     respond_to do |format|
       if @company.save
@@ -26,21 +31,6 @@ class CompaniesController < ApplicationController
       end
     end
   end
-  #
-  # def create
-  #     @company = Company.new(user_params)
-  #     if @company.save
-  #         render json: {
-  #             status: :created,
-  #             user: @company
-  #         }
-  #     else
-  #         render json: {
-  #             status: 500,
-  #             errors: @company.errors.full_messages
-  #         }
-  #     end
-  # end
 
   # GET /companies
   # GET /companies.json
