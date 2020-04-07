@@ -3,6 +3,16 @@ class HistoriesController < ApplicationController
 
   def index
     @histories = History.all
+    if @histories
+      render json: {
+        histories: @histories
+      }
+    else
+      render json: {
+        status: 500,
+        errors: ['no histories found']
+      }
+    end
   end
 
   def show
