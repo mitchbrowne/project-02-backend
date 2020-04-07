@@ -60,9 +60,6 @@ class RequestsController < ApplicationController
   def histories_show
     @gallery = Gallery.find(params[:id])
     @ads = @gallery.ads
-    # @histories = @ads.map do |ad|
-    #   history = ad.histories
-    # end
     @history_info = @ads.map do |ad|
       has_seen_total = ad.histories.count { |e| e.has_been_seen == true }
       has_notseen_total = ad.histories.count { |e| e.has_been_seen == false }
@@ -87,6 +84,12 @@ class RequestsController < ApplicationController
     end
   end
 
+  def histories_update
+    @history = History.find params[:id]
+    @history = History.update history_params
+    @history.save
+  end
+
   def companies
     @companies = Company.all
     if @companies
@@ -100,4 +103,10 @@ class RequestsController < ApplicationController
       }
     end
   end
+
+  private
+  def history_params
+    params.require(:history).permit(:user_id, :ad_id, :has_been_seen)
+  end
+
 end
