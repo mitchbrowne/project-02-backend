@@ -15,16 +15,48 @@ class RequestsController < ApplicationController
     end
   end
 
-  def companies
-    @companies = Company.all
-    if @companies
+  def ads_show
+    @company = Company.find(params[:id])
+    @ads = @company.ads
+    @history_info = @ads.map do |ad|
+      has_seen_total = ad.histories.count { |e| e.has_been_seen == true }
+      has_notseen_total = ad.histories.count { |e| e.has_been_seen == false }
+      total = has_seen_total + has_notseen_total
+      history = {
+        has_seen_total: has_seen_total,
+        has_notseen_total: has_notseen_total,
+        total: total
+      }
+    end
+    if @ads
       render json: {
-        companies: @companies
+        company: @company,
+        ads: @ads,
+        history_info: @history_info
       }
     else
       render json: {
         status: 500,
-        errors: ['no companies found']
+        errors: ['no ads found']
+      }
+    end
+  end
+
+  def user_ads
+    @user = User.find(params[:id])
+    @ads = @user.company.ads
+  end
+
+  def companies_show
+    @company = Company.find(params[:id])
+    if @company
+      render json: {
+        company: @company
+      }
+    else
+      render json: {
+        status: 500,
+        errors: ['no company found']
       }
     end
   end
