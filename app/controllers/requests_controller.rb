@@ -15,16 +15,21 @@ class RequestsController < ApplicationController
     end
   end
 
-  def companies
-    @companies = Company.all
-    if @companies
+  def user_ads
+    @user = User.find(params[:id])
+    @ads = @user.company.ads
+  end
+
+  def companies_show
+    @company = Company.find(params[:id])
+    if @company
       render json: {
-        companies: @companies
+        company: @company
       }
     else
       render json: {
         status: 500,
-        errors: ['no companies found']
+        errors: ['no company found']
       }
     end
   end

@@ -21,5 +21,5 @@ Rails.application.routes.draw do
   get '/requests/galleries/:id' => 'requests#galleries_show'
   get '/requests/histories/:id' => 'requests#histories_show'
   post '/requests/histories/:id' => 'requests#histories_update'
-  get '/requests/companies' => 'requests#companies'
+  get '/requests/companies/:id' => 'requests#companies_show'
 end
