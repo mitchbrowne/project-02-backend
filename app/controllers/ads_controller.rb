@@ -32,20 +32,24 @@ class AdsController < ApplicationController
   # GET /ads/1/edit
   def edit
     @companies = Company.all
+    @company = @ad.company
+    if @ad
+      render json: {
+        ad: @ad,
+        company: @company
+      }
+    else
+      render json: {
+        status: 500,
+        errors: ['no ad found']
+      }
+    end
   end
 
   # PATCH/PUT /ads/1
   # PATCH/PUT /ads/1.json
   def update
-    respond_to do |format|
-      if @ad.update(ad_params)
-        format.html { redirect_to @ad, notice: 'Ad was successfully updated.' }
-        format.json { render :show, status: :ok, location: @ad }
-      else
-        format.html { render :edit }
-        format.json { render json: @ad.errors, status: :unprocessable_entity }
-      end
-    end
+    @ad.update(ad_params)
   end
 
   def destroy
