@@ -97,12 +97,13 @@ class RequestsController < ApplicationController
 
   def galleries_show
     @gallery = Gallery.find(params[:id])
+    @user = User.find(params[:user_id])
     @ads = @gallery.ads
 
     # create a history for each ad, update to current_user
     @histories = @ads.map do |ad|
       h = History.new
-      h.user_id = 2
+      h.user_id = @user.id
       h.ad_id = ad.id
       h.save
       h
