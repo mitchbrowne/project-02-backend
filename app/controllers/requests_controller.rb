@@ -47,6 +47,22 @@ class RequestsController < ApplicationController
     @ads = @user.company.ads
   end
 
+  def user_galleries
+    @user = User.find(params[:id])
+    @galleries = @user.galleries
+
+    if @galleries
+      render json: {
+        galleries: @galleries,
+      }
+    else
+      render json: {
+        status: 500,
+        errors: ['no galleries found']
+      }
+    end
+  end
+
   def companies_show
     @company = Company.find(params[:id])
     if @company
