@@ -51,12 +51,28 @@ class GalleriesController < ApplicationController
   def edit
     @ads = Ad.all
     @users = User.all
+    @gallery = Gallery.find(params[:id])
+    @gallery_ads = @gallery.ads
+    if @gallery
+      render json: {
+        gallery: @gallery,
+        ads: @ads,
+        gallery_ads: @gallery_ads
+      }
+    else
+      render json: {
+        status: 500,
+        errors: ['no gallery found']
+      }
+    end
   end
+
 
   # PATCH/PUT /galleries/1
   # PATCH/PUT /galleries/1.json
   def update
     @ads = Ad.all
+    @gallery.update(gallery_params)
 
     @gallery.ads = []
     unless params[:gallery][:ad_ids].nil?
@@ -65,15 +81,7 @@ class GalleriesController < ApplicationController
       end
     end
 
-    respond_to do |format|
-      if @gallery.update(gallery_params)
-        format.html { redirect_to @gallery, notice: 'Gallery was successfully updated.' }
-        format.json { render :show, status: :ok, location: @gallery }
-      else
-        format.html { render :edit }
-        format.json { render json: @gallery.errors, status: :unprocessable_entity }
-      end
-    end
+    
   end
 
   def destroy

@@ -14,12 +14,12 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
     # Must attach current user to company
     # @company.user_id << @current_user
-    @company.users = []
-    unless params[:user][:user_ids].nil?
-      params[:user][:user_ids].each do |user_id|
-        @company.users << User.find(user_id) unless user_id.empty?
-      end
-    end
+    # @company.users = []
+    # unless params[:user][:user_ids].nil?
+    #   params[:user][:user_ids].each do |user_id|
+    #     @company.users << User.find(user_id) unless user_id.empty?
+    #   end
+    # end
 
     respond_to do |format|
       if @company.save
@@ -36,11 +36,22 @@ class CompaniesController < ApplicationController
   # GET /companies.json
   def index
     @companies = Company.all
+    if @companies
+      render json: {
+          companies: @companies
+      }
+    else
+      render json: {
+        status: 500,
+        errors: ['No companies']
+      }
+    end
   end
 
   # GET /companies/1
   # GET /companies/1.json
   def show
+    @companies = Company.all
   end
 
   # GET /companies/1/edit

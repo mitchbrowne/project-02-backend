@@ -15,16 +15,7 @@ class AdsController < ApplicationController
     # Must attach current user to ad, including their company id
     # @ad.user_id << @current_user
     # @ad.company_id << @current_user.company
-
-    respond_to do |format|
-      if @ad.save
-        format.html { redirect_to @ad, notice: 'Ad was successfully created.' }
-        format.json { render :show, status: :created, location: @ad }
-      else
-        format.html { render :new }
-        format.json { render json: @ad.errors, status: :unprocessable_entity }
-      end
-    end
+    @ad.save
   end
 
   # GET /ads
@@ -41,20 +32,24 @@ class AdsController < ApplicationController
   # GET /ads/1/edit
   def edit
     @companies = Company.all
+    @company = @ad.company
+    if @ad
+      render json: {
+        ad: @ad,
+        company: @company
+      }
+    else
+      render json: {
+        status: 500,
+        errors: ['no ad found']
+      }
+    end
   end
 
   # PATCH/PUT /ads/1
   # PATCH/PUT /ads/1.json
   def update
-    respond_to do |format|
-      if @ad.update(ad_params)
-        format.html { redirect_to @ad, notice: 'Ad was successfully updated.' }
-        format.json { render :show, status: :ok, location: @ad }
-      else
-        format.html { render :edit }
-        format.json { render json: @ad.errors, status: :unprocessable_entity }
-      end
-    end
+    @ad.update(ad_params)
   end
 
   def destroy
@@ -71,6 +66,6 @@ class AdsController < ApplicationController
   end
 
   def ad_params
-    params.require(:ad).permit(:name, :ad_type, :image, :company_id)
+    params.require(:ad).permit(:name, :ad_type, :image, :company_id, :user_id)
   end
 end
