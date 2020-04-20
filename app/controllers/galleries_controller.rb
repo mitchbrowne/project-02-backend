@@ -80,8 +80,6 @@ class GalleriesController < ApplicationController
         @gallery.ads << Ad.find(ad_id) unless ad_id.empty?
       end
     end
-
-    
   end
 
   def destroy
